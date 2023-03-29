@@ -20,7 +20,7 @@ export default function Screen({dataone,table,datatwo}) {
      const handleClick=()=>{
         navigate('/')
      }
-    
+   
   
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -34,6 +34,11 @@ export default function Screen({dataone,table,datatwo}) {
 
     });
     const [loading, setLoading] = useState(true);
+    const [refresh,setRefresh]=useState(false);
+
+    const hadleRefresh=()=>{
+        setRefresh(true)
+    }
 
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     useEffect(() => {
@@ -41,6 +46,7 @@ export default function Screen({dataone,table,datatwo}) {
             setLoading(false);
        
     }, []); 
+
 
    
 
@@ -62,7 +68,7 @@ export default function Screen({dataone,table,datatwo}) {
                     {dataone ?(
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
                      ) :(
-                        <Button icon="pi pi-refresh" rounded raised />
+                        <Button icon="pi pi-refresh" rounded raised onClick={hadleRefresh}/>
                      )}
                 </span>
             </div>
@@ -92,7 +98,7 @@ export default function Screen({dataone,table,datatwo}) {
             </DataTable>
 
 ):(
-           <DataTable value={datatwo}  rows={10} dataKey="id"  filterDisplay="row"   loading={loading} sortMode="multiple"
+           <DataTable value={datatwo}  rows={10} dataKey="id"  filterDisplay="row"   loading={loading} refresh={refresh} sortMode="multiple"
                     header={header} emptyMessage="No customers found." >
               <Column field="id" header="ID" filterField="id" filter filterPlaceholder="Search by ID" sortable style={{ minWidth: '12rem' }}/>
                <Column field="name" header='Name' filterField="name"  filter filterPlaceholder="Search by name" sortable style={{ minWidth: '12rem' }}  />

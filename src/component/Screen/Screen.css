@@ -1,0 +1,13 @@
+
+  .p-datatable-tbody tr {
+    background: #fff !important;
+    color: black !important;
+  }
+  
+  #icon{
+    display: flex;
+  }
+  #icon:hover{
+    cursor: pointer;
+  }
+ 
